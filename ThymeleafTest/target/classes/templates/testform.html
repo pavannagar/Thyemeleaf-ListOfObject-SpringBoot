@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" th:replace="base::layout(~{::body})" >
+<head>
+	<meta charset="UTF-8" />
+	<title>Signup</title>
+	- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	<style type="text/css">
+    .success{
+    	border-color: #2ecc71;
+    }
+    </style>
+    
+</head>
+<body>
+
+	<section >
+		<div class="container" >
+			<div class="row">
+				
+				<div class="col-md-6 offset-md-3">
+				
+					<div class="my-reg-form">
+					
+						
+								
+						<h2 class="text-center">Register Here !!</h2>
+						
+								<!-- Note *********
+										here i use
+										th:value="${customer?.name}"  
+										instead of th:value="${customer.name}"
+								 -->		
+																	
+								<form id="form" class="row g-3"  th:action="@{/register}" th:object="${user}" th:method="post"  >
+									<script type="text/javascript">
+									console.log("Hello world!");
+									</script>
+									
+												<p> error count <span th:text="${res?.getFieldErrorCount('firstName')}" ></span> </p>				
+									
+									 <div class="col-md-6 ">
+									    <label for="inputName" class="form-label">First Name</label>
+									    <input  name="firstName" th:value="${user?.firstName}" type="text" class="form-control"  id="firstName" th:classappend="${res?.getFieldErrorCount('firstName')} ? 'is-invalid':'' " > 
+										<div id="fName" class="invalid-feedback"   >
+      										<span></span>
+    									</div> 
+									    
+									  </div>
+								
+									 <div class="col-md-6" >
+									    <label for="inputLastName" class="form-label">Last Name</label>
+									    <input  name="lastName" th:value="${user?.lastName}" type="text" class="form-control" id="lastName">
+									     <div id="fName" class="invalid-feedback"   >
+      										<span></span>
+    									</div> 
+									  </div>
+											
+									  <div class="col-md-6">
+									    <label for="inputEmail4" class="form-label">Email</label>
+									    <input  name="email" th:value="${user?.email}" type="email" class="form-control" id="email">
+									      <div id="fName" class="invalid-feedback"   >
+      										<span></span>
+    									</div>
+									  </div>
+									  
+									  <div class="col-md-6">
+									    <label for="inputPassword4" class="form-label">Password</label>
+									    <input  name="password" th:value="${user?.password}" type="password" class="form-control" id="password">
+									    <div id="fName" class="invalid-feedback"   >
+      										<span></span>
+    									</div> 
+									  </div>
+									  
+										<div class="col-12">
+									   	<table style="width:100%">
+											  <tr>
+											    <th>ID</th>
+											    <th>Address</th>
+											    <th>City</th>
+											  </tr>
+											 <tr th:each="add,itemStat : ${user.addresses}" >
+												    <td>
+												       <input th:field="*{addresses[__${itemStat.index}__].id}"/>
+												    </td>
+												    <td>
+												       <input th:field="*{addresses[__${itemStat.index}__].addr}"/>
+												    </td>
+												    <td>
+												       <input th:field="*{addresses[__${itemStat.index}__].city}"/>
+												    </td>
+												</tr>
+											  
+											</table>
+									    </div>
+									  </div>					
+									
+									  <div class="col-md-4 offset-md-4">
+									    <button type="submit" class="btn btn-primary">Submit</button>
+									    <button type="reset" class="btn btn-danger">Reset</button>
+									  </div>
+								</form>
+							
+						
+						
+						
+					
+					</div>
+					
+				
+				</div>	
+				
+		
+			</div> 
+		</div>
+	
+	
+	</section>
+
+	
+
+</body>
+</html>
